@@ -1,0 +1,44 @@
+// Convert the increment and decrement to useReducer!
+// Make sure to have constants --> ACTIONS
+
+import React, { useReducer } from "react";
+import CountComponent from "./CountComponent";
+
+export const ACTIONS = {
+  INCREMENT: "INCREMENT",
+  DECREMENT: "DECREMENT",
+};
+
+function countReducer(state, action) {
+  switch (action.type) {
+    case ACTIONS.INCREMENT:
+      return { count: state.count + 1 };
+    case ACTIONS.DECREMENT:
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+}
+
+function CounterApp() {
+  const [state, dispatch] = useReducer(countReducer, { count: 0 });
+
+  // Increment - from props
+  function increment() {
+    dispatch({ type: ACTIONS.INCREMENT });
+  }
+
+  //  Decrement - from Dispatch
+  //   function decrement() {
+  //     dispatch({ type: ACTIONS.DECREMENT });
+  //   }
+
+  return (
+    <div>
+      {/* <CountComponent count={state.count} dispatch={dispatch} increment={increment} /> */}
+      <CountComponent count={state.count} dispatch={dispatch} increment={increment} />
+    </div>
+  );
+}
+
+export default CounterApp;
